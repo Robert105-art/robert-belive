@@ -1,268 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Robert Belive | Web Developer</title>
-  <meta name="description" content="Robert Belive - Web Developer building fast, dangerous sites.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
-  <style>
-    :root {
-      --bg: #0A0A0A;
-      --text: #EDEDED;
-      --accent: #FF6B35;
-      --gray: #1A1A1A;
-      --green: #00FF88;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: 'Courier New', monospace; line-height: 1.6;
-      overflow-x: hidden; cursor: none;
-    }
-    /* CUSTOM CURSOR */
-   .cursor {
-      width: 20px; height: 20px; border: 2px solid var(--accent);
-      border-radius: 50%; position: fixed; pointer-events: none;
-      transform: translate(-50%, -50%); z-index: 9999; transition: 0.1s;
-    }
-   .cursor.grow { transform: translate(-50%, -50%) scale(2); background: rgba(255,107,53,0.2); }
-   .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-    /* NAV */
-    nav { position: fixed; top: 0; width: 100%; background: rgba(10,10,10,0.8); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--gray); }
-    nav.container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-   .logo { font-weight: 900; font-size: 1.5rem; }
-   .logo span { color: var(--accent); }
-   .nav-links a { color: var(--text); text-decoration: none; margin-left: 2rem; font-weight: 700; }
-   .nav-links a:hover { color: var(--accent); }
-    /* HERO */
-    #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
-   .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-   .profile-pic {
-      width: 300px; height: 300px; border-radius: 50%; border: 3px solid var(--accent);
-      object-fit: cover; filter: grayscale(100%); transition: 0.3s;
-      justify-self: center;
-    }
-   .profile-pic:hover { filter: grayscale(0%); transform: rotate(5deg); }
-    h1 { font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1; font-weight: 900; text-transform: uppercase; }
-    h1.accent { color: var(--accent); }
-   .typewriter { color: var(--green); font-weight: 700; min-height: 1.5em; }
-   .typewriter::after { content: '_'; animation: blink 1s infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
-   .subtitle { font-size: 1.1rem; margin: 1.5rem 0 2.5rem; color: #999; }
-   .btn { display: inline-block; padding: 1rem 2rem; background: var(--accent); color: var(--bg); text-decoration: none; font-weight: 900; text-transform: uppercase; border: 2px solid var(--accent); transition: 0.2s; }
-   .btn:hover { background: transparent; color: var(--accent); }
-   .btn-secondary { background: transparent; color: var(--text); border-color: var(--text); margin-left: 1rem; }
-   .btn-secondary:hover { background: var(--text); color: var(--bg); }
-    /* SECTIONS */
-    section { padding: 6rem 0; border-bottom: 1px solid var(--gray); }
-    h2 { font-size: 3rem; margin-bottom: 3rem; text-transform: uppercase; }
-    h2 span { color: var(--accent); }
-    /* PROJECTS */
-   .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-   .project { background: var(--gray); padding: 2rem; border: 1px solid #2a2a2a; transition: 0.3s; }
-   .project:hover { transform: translateY(-5px); border-color: var(--accent); }
-   .project h3 { font-size: 1.5rem; margin-bottom: 1rem; }
-   .project p { color: #999; margin-bottom: 1.5rem; }
-   .project.tags { margin-bottom: 1.5rem; }
-   .tag { display: inline-block; background: #000; padding: 0.25rem 0.75rem; margin: 0 0.5rem 0.5rem 0; font-size: 0.8rem; border: 1px solid #333; }
-   .project a { color: var(--accent); text-decoration: none; font-weight: 700; }
-    /* SKILLS */
-   .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
-   .skill { background: var(--gray); padding: 1.5rem; border: 1px solid #2a2a2a; text-align: center; transition: 0.3s; }
-   .skill:hover { background: var(--accent); color: var(--bg); }
-   .skill:hover.skill-name { color: var(--bg); }
-   .skill-name { font-weight: 700; color: var(--accent); }
-    /* CONTACT */
-    #contact { text-align: center; }
-   .terminal { background: #000; border: 1px solid var(--accent); padding: 2rem; text-align: left; max-width: 600px; margin: 2rem auto; }
-   .terminal-line::before { content: "> "; color: var(--accent); }
-   .terminal-input { background: transparent; border: none; color: var(--green); font-family: inherit; font-size: 1rem; width: 80%; outline: none; }
-    footer { padding: 2rem 0; text-align: center; color: #666; font-size: 0.9rem; }
-    /* MOBILE */
-    @media (max-width: 768px) { 
-     .nav-links { display: none; } 
-     .hero-content { grid-template-columns: 1fr; text-align: center; }
-     .profile-pic { width: 200px; height: 200px; order: -1; margin-bottom: 2rem; }
-     .btn-secondary { margin-left: 0; margin-top: 1rem; display: block; } 
-      body { cursor: auto; }.cursor { display: none; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robert Belive Tech | Web Development & Graphics Design</title>
+    <meta name="description" content="Robert Belive Tech - Web Development & Graphics Design in Riyadh. Fast, mobile-first websites and brand visuals that convert.">
+
+    <!-- Open Graph for WhatsApp/LinkedIn sharing -->
+    <meta property="og:title" content="Robert Belive Tech">
+    <meta property="og:description" content="Web Development & Graphics Design That Actually Converts">
+    <meta property="og:image" content="images/og-image.jpg">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#1f2020">
+
+    <style>
+        :root {
+            --bg: #1f2020;
+            --accent: #D4AF37;
+            --text: #f5f5f5;
+            --muted: #999;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: var(--bg);
+            font-family: 'Montserrat', system-ui, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: rgba(27, 25, 25, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+       .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+       .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            transition: 0.3s;
+            position: relative;
+        }
+       .nav-links a:hover {
+            color: var(--accent);
+        }
+       .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent);
+            transition: 0.3s;
+        }
+       .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* MOBILE NAV */
+       .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+           .menu-toggle {
+                display: block;
+            }
+           .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(27, 25, 25, 0.98);
+                flex-direction: column;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease;
+                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            }
+           .nav-links.active {
+                max-height: 400px;
+                padding: 1rem 0;
+            }
+           .nav-links li {
+                padding: 0.8rem 5%;
+            }
+        }
+
+       .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+            text-align: center;
+            padding: 2rem;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1), transparent);
+        }
+        #me {
+            border-radius: 50%;
+            margin: 20px;
+            border: 3px solid var(--accent);
+            transition: 0.4s;
+        }
+        #me:hover {
+            transform: scale(1.05) rotate(3deg);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+       .name {
+            color: var(--accent);
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+       .description {
+            color: var(--text);
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+       .whatsapp-btn {
+            background: var(--accent);
+            color: #000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+       .whatsapp-btn:hover {
+            background: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        section {
+            padding: 5rem 5%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.6s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+       .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+       .section-title h1 {
+            color: var(--text);
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+       .section-title span {
+            color: var(--accent);
+        }
+
+       .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+       .grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.4s;
+            border: 2px solid transparent;
+        }
+       .grid img:hover {
+            transform: scale(1.03);
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+       .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+       .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+        }
+       .lightbox.active {
+            display: flex;
+        }
+       .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+        }
+
+        #about {
+            background: #000;
+            text-align: center;
+        }
+        #about p {
+            max-width: 700px;
+            margin: 1rem auto;
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: #000;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        footer p {
+            color: var(--muted);
+            margin-top: 1rem;
+        }
+
+       .tools-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 1.5rem;
+        }
+       .tools-stack span {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+       .tools-stack span:hover {
+            background: var(--accent);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+       .scroll-wrapper {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+       .scroll-selector {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            padding: 20px 50px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+       .scroll-selector::-webkit-scrollbar {
+            display: none;
+        }
+       .selector-item {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            max-width: 320px;
+        }
+       .selector-item img {
+            width: 100%;
+            height: 240px;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: 0.4s;
+        }
+       .selector-item:hover img {
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+       .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(212, 175, 55, 0.9);
+            color: #000;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+       .scroll-arrow:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.1);
+        }
+       .scroll-arrow.left {
+            left: 5px;
+        }
+       .scroll-arrow.right {
+            right: 5px;
+        }
+       .scroll-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+       .dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+       .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #444;
+            transition: background 0.3s;
+        }
+       .dot.active {
+            background: var(--accent);
+        }
+
+        @media (min-width: 900px) {
+           .scroll-selector {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                overflow: visible;
+                scroll-snap-type: none;
+                padding: 20px 0;
+            }
+           .selector-item {
+                flex: none;
+                max-width: none;
+                width: 100%;
+            }
+           .dots,.scroll-arrow {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+           .name {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="cursor"></div>
-  
-  <nav>
-    <div class="container">
-      <div class="logo">ROBERT<span><\></span></div>
-      <div class="nav-links">
-        <a href="#work">Work</a>
-        <a href="#skills">Stack</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </div>
+
+<header>
+    <nav>
+        <img src="images/robert-belive-logo.png" width="100" height="80" alt="Robert Belive Tech Logo">
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#cards">Business Cards</a></li>
+            <li><a href="#logos">Logos</a></li>
+            <li><a href="#websites">Websites</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <div>
+        <img id="me" src="images/robert-photo.webp" width="200" height="200" loading="eager" alt="Robert Belive">
+        <h1 class="name">Robert Belive Tech</h1>
+        <h2 class="description">Web Development & Graphics Design That Actually Converts</h2>
+
+        <p style="max-width: 600px; margin: 0 auto 1.5rem; color: var(--muted); font-size: 1rem;">
+            I build fast, mobile-first websites and brand visuals for clients in Riyadh and beyond.
+            No templates. No 8-second load times. Just clean code and designs that get you clients.
+        </p>
+
+        <div class="tools-stack">
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript</span>
+            <span>Canva</span>
+            <span>Figma</span>
+            <span>Responsive</span>
+        </div>
+
+        <a href="https://wa.me/966578863032?text=I%20want%20you%20to%20build%20me%20a%20website" class="whatsapp-btn" style="margin-top: 2rem;" rel="noopener">
+            Let's Build Something
+        </a>
     </div>
-  </nav>
+</section>
 
-  <main>
-    <section id="hero">
-      <div class="container">
-        <div class="hero-content">
-          <div>
-            <h1>WEB<br>DEVELOPER<span class="accent">.</span></h1>
-            <div class="typewriter" id="typewriter"></div>
-            <p class="subtitle">I build websites that load fast, rank high, and convert. No WordPress. No bloat. Just clean code on GitHub Pages. Contact Robert</p>
-            <a href="#work" class="btn">View Work</a>
-            <a href="https://robert-bakery-demo.netlify.app" class="btn btn-secondary" target="_blank">Live Demo</a>
-          </div>
-          <img src="profile.webp" alt="Robert Belive" class="profile-pic" id="profilePic">
-        </div>
-      </div>
-    </section>
-
-    <section id="work">
-      <div class="container">
-        <h2>SELECTED<span> WORK</span></h2>
-        <div class="projects">
-          <div class="project">
-            <h3>Robert Bakery Demo</h3>
-            <div class="tags">
-              <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">GitHub Pages</span>
-            </div>
-            <p>Full brand + static site. Built in 48hrs. 98 Lighthouse score. Deployed on GitHub Pages.</p>
-            <a href="https://robert105-art.github.io/robert-belive" target="_blank">Live Site →</a>
-          </div>
-          <div class="project">
-            <h3>SaaS Landing Page</h3>
-            <div class="tags">
-              <span class="tag">React</span><span class="tag">Tailwind</span><span class="tag">Vite</span>
-            </div>
-            <p>High-converting landing. A/B tested. 0.6s load time. Netlify Forms integration.</p>
-            <a href="#" onclick="alert('Add your project link here')">Case Study →</a>
-          </div>
-          <div class="project">
-            <h3>This Portfolio</h3>
-            <div class="tags">
-              <span class="tag">Vanilla JS</span><span class="tag">CSS</span><span class="tag">Zero Deps</span>
-            </div>
-            <p>Meta. Single HTML file. Custom cursor. Typewriter effect. 12KB gzipped.</p>
-            <a href="https://github.com" target="_blank">View Code →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills">
-      <div class="container">
-        <h2>TECH<span> STACK</span></h2>
-        <div class="skills">
-          <div class="skill"><div class="skill-name">HTML5</div>Semantic, SEO-ready</div>
-          <div class="skill"><div class="skill-name">CSS3</div>Grid, Flex, Animations</div>
-          <div class="skill"><div class="skill-name">JavaScript</div>ES6+, DOM, APIs</div>
-          <div class="skill"><div class="skill-name">React</div>Hooks, Vite</div>
-          <div class="skill"><div class="skill-name">Tailwind</div>Utility-first</div>
-          <div class="skill"><div class="skill-name">Netlify</div>Deploy, Forms, Functions</div>
-          <div class="skill"><div class="skill-name">Git</div>GitHub, CI/CD</div>
-          <div class="skill"><div class="skill-name">Figma</div>UI/UX to Code</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="container">
-        <h2>ABOUT<span> ME</span></h2>
-        <p style="max-width: 700px; font-size: 1.1rem; color: #999;">Started on InfinityFree. Pages took 8 seconds to load. Clients left. I left. Moved to Netlify + modern stack. Now I ship sites that feel illegal to be this fast.</p>
-        <br>
-        <p style="max-width: 700px; font-size: 1.1rem; color: #999;">Based in Riyadh. Building for the world. If your site looks like 2015, let's talk.</p>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <h2>INITIALIZE<span> CONTACT</span></h2>
-        <div class="terminal">
-          <p class="terminal-line">robert@portfolio:~$ <span id="terminalOutput">Type 'help' for commands</span></p>
-          <p class="terminal-line">
-            <input type="text" class="terminal-input" id="terminal" placeholder="_" autofocus>
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>© 2026 ROBERT BELIVE. BUILT WITH VS CODE + CAFFEEINE</p>
+<section id="cards">
+    <div class="section-title">
+        <h1>Business Card <span>Showroom</span></h1>
     </div>
-  </footer>
+    <div class="grid">
+        <img src="images/meta-business-card.webp" alt="Meta Business Card" class="lightbox-trigger" loading="lazy" width="600" height="400">
+        <img src="images/meta-business-card-2.webp" alt="Meta Business Card 2" class="lightbox-trigger" loading="lazy" width="600" height="400">
+        <img src="images/feiy-business-card-1.webp" alt="FEIY Beauty Salon Business Card 1" class="lightbox-trigger" loading="lazy" width="600" height="400">
+        <img src="images/feiy-business-card-2.webp" alt="FEIY Beauty Salon Business Card 2" class="lightbox-trigger" loading="lazy" width="600" height="400">
+    </div>
+</section>
 
-  <script>
-    // 1. TYPEWRITER EFFECT
-    const words = ['Fast Websites', 'Netlify Deploys', 'Clean Code', 'Zero Bloat'];
-    let i = 0, j = 0, currentWord = '', isDeleting = false;
-    const typewriter = document.getElementById('typewriter');
-    
-    function type() {
-      currentWord = words[i];
-      typewriter.textContent = isDeleting? currentWord.substring(0, j--) : currentWord.substring(0, j++);
-      
-      if (!isDeleting && j === currentWord.length + 1) {
-        isDeleting = true; setTimeout(type, 2000);
-      } else if (isDeleting && j === 0) {
-        isDeleting = false; i = (i + 1) % words.length; setTimeout(type, 200);
-      } else {
-        setTimeout(type, isDeleting? 50 : 100);
-      }
-    }
-    type();
+<section id="logos">
+    <div class="section-title">
+        <h1>Logo <span>Designs</span></h1>
+    </div>
 
-    // 2. CUSTOM CURSOR
-    const cursor = document.querySelector('.cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
+    <div class="scroll-wrapper">
+        <button class="scroll-arrow left" id="scrollLeft" aria-label="Previous logo">‹</button>
+        <div class="scroll-selector" id="logoScroll">
+            <div class="selector-item">
+                <img src="images/robert-belive-logo.png" alt="Robert Belive Tech Logo" class="lightbox-trigger" loading="lazy" width="400" height="240">
+            </div>
+            <div class="selector-item">
+                <img src="images/kaliisa-logo.webp" alt="Kaliisa Logo" class="lightbox-trigger" loading="lazy" width="400" height="240">
+            </div>
+            <div class="selector-item">
+                <img src="images/teacher-jacky-logo.png" alt="Teacher Jacky Logo" class="lightbox-trigger" loading="lazy" width="400" height="240">
+            </div>
+            <div class="selector-item">
+                <img src="images/meta-farms.png" alt="Meta Farms Logo" class="lightbox-trigger" loading="lazy" width="400" height="240">
+            </div>
+            <div class="selector-item">
+                <img src="images/feiy-beauty.webp" alt="FEIY Beauty Salon Logo" class="lightbox-trigger" loading="lazy" width="400" height="240">
+            </div>
+            <div class="selector-item">
+                <img src="images/jeri-foot-locker.png" alt="Jeri Foot Locker Logo" class="lightbox-trigger" loading="lazy" width="400" height="240">
+            </div>
+            <div class="selector-item">
+                <img src="images/katiko.webp" alt="Katiko Logo" class="lightbox-trigger" loading="lazy" width="400" height="240">
+            </div>
+            <div class="selector-item">
+                <img src="images/ISAIAH.png" alt="ISAIAH Logo" class="lightbox-trigger" loading="lazy" width="400" height="240">
+            </div>
+        
+
+        <div class="selector-item">
+                <img src="images/beilive.png" alt="Beilive Logo" class="lightbox-trigger" loading="lazy" width="400" height="240">
+            </div>
+        </div>
+
+        <button class="scroll-arrow right" id="scrollRight" aria-label="Next logo">›</button>
+    </div>
+
+    <div class="dots" id="logoDots"></div>
+</section>
+
+<section id="about">
+    <h2 style="color: var(--accent); font-size: 2.5rem; margin-bottom: 1rem;">From InfinityFree to International</h2>
+    <p>I started on free hosting with 8-second load times and lost clients because of it. That frustration taught me one thing: speed and design aren't optional.</p>
+    <p>Today I build on modern stacks for clients across Riyadh and beyond. I handle everything from logo design to full websites, always with one goal - make your brand look expensive and work fast.</p>
+    <p>Your brand deserves better than a template. Let's build something that actually works.</p>
+    <a href="https://wa.me/966578863032?text=I%20want%20to%20work%20with%20you" class="whatsapp-btn" style="margin-top: 2rem;" rel="noopener">
+        Work With Me
+    </a>
+</section>
+
+<footer id="contact">
+    <h3 style="color: var(--accent);">Ready to Start?</h3>
+    <p style="color: var(--text); margin: 1rem 0;">WhatsApp: +966 57 886 3032</p>
+    <a href="https://wa.me/966578863032?text=I%20want%20you%20to%20build%20me%20a%20website" class="whatsapp-btn" style="margin: 1.5rem 0;" rel="noopener">
+        Contact Me on WhatsApp
+    </a>
+    <p>© <span id="year"></span> ROBERT BELIVE TECH. Built to convert.</p>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <span class="lightbox-close" aria-label="Close">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    menuToggle.addEventListener('click', () => {
+        const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded',!expanded);
+        navLinks.classList.toggle('active');
     });
-    document.querySelectorAll('a,.btn,.project,.skill').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+
+    // Fade in on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(section => {
+        observer.observe(section);
     });
 
-    // 3. INTERACTIVE TERMINAL
-    const terminal = document.getElementById('terminal');
-    const output = document.getElementById('terminalOutput');
-    const commands = {
-      'help': 'Commands: hire, email, clear',
-      'hire': 'Opening WhatsApp...',
-      'email': 'bayegarobert63@gmail.com',
-      'clear': ''
-    };
-    
-    terminal.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        const cmd = terminal.value.toLowerCase().trim();
-        if (commands[cmd]) {
-          output.textContent = commands[cmd];
-          if (cmd === 'hire') window.open('https://wa.me/966578863032?text=Hi Robert, I want to hire you', '_blank');
-    
-          if (cmd === 'clear') output.textContent = '';
-        } else {
-          output.textContent = `Command not found: ${cmd}. Type 'help'`;
+    // Lightbox with ESC key
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+
+    document.querySelectorAll('.lightbox-trigger').forEach(img => {
+        img.addEventListener('click', () => {
+            lightbox.classList.add('active');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+        });
+    });
+
+    const closeLightbox = () => lightbox.classList.remove('active');
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
         }
-        terminal.value = '';
-      }
     });
 
-    // 4. PROFILE PIC EASTER EGG
-    document.getElementById('profilePic').addEventListener('click', () => {
-      alert('Yes, that\'s me. Now hire me.');
+    // Smooth scroll with accurate offset
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            navLinks.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const position = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                window.scrollTo({ top: position, behavior: 'smooth' });
+            }
+        });
     });
-  </script>
-    <!-- WhatsApp Float Button -->
-<a href="https://wa.me/966578863032?text=Hi Robert, from your portfolio" 
-   target="_blank" 
-   style="position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; box-shadow: 0 4px 12px rgba(37,211,102,0.4);">
-   💬
-</a>
+
+    // Logo scroll selector
+    const logoScroll = document.getElementById('logoScroll');
+    const logoItems = logoScroll.querySelectorAll('.selector-item');
+    const logoDotsContainer = document.getElementById('logoDots');
+    const btnLeft = document.getElementById('scrollLeft');
+    const btnRight = document.getElementById('scrollRight');
+
+    // Create dots
+    logoItems.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        logoDotsContainer.appendChild(dot);
+    });
+
+    const dots = logoDotsContainer.querySelectorAll('.dot');
+
+    // Update dots + arrows on scroll
+    function updateScrollState() {
+        const scrollLeft = logoScroll.scrollLeft;
+        const itemWidth = logoItems[0].offsetWidth + 20;
+        const activeIndex = Math.round(scrollLeft / itemWidth);
+
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === activeIndex);
+        });
+
+        btnLeft.disabled = scrollLeft <= 10;
+        btnRight.disabled = scrollLeft >= logoScroll.scrollWidth - logoScroll.clientWidth - 10;
+    }
+
+    logoScroll.addEventListener('scroll', updateScrollState);
+
+    // Arrow click events
+    btnLeft.addEventListener('click', () => {
+        logoScroll.scrollBy({ left: -(logoItems[0].offsetWidth + 20), behavior: 'smooth' });
+    });
+
+    btnRight.addEventListener('click', () => {
+        logoScroll.scrollBy({ left: logoItems[0].offsetWidth + 20, behavior: 'smooth' });
+    });
+
+    // Initialize
+    updateScrollState();
+    window.addEventListener('resize', updateScrollState);
+
+});
+</script>
+
 </body>
 </html>
