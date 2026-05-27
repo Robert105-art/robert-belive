@@ -406,6 +406,121 @@
                 font-size: 2.5rem;
             }
         }
+
+        :root {
+      --card: #111;
+      --accent: #00bfff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, Arial, sans-serif;
+      background: black;
+      color: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 4rem 0;
+    }
+
+    .text-center { text-align: center; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+
+    h2 {
+      color: yellowgreen;
+      font-weight: 800;
+      font-size: 2rem;
+    }
+
+    h3 {
+      color: yellowgreen;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ddd;
+    }
+
+    a {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover { text-decoration: underline; }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    /* Card Animation */
+    .selector-item {
+      background: var(--card); 
+      border-radius: 12px; 
+      border: 1px solid #222;
+      transition: all 0.4s ease;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      position: relative;
+    }
+    .selector-item.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .selector-item:hover { 
+      transform: translateY(-10px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(0,191,255,0.15);
+    }
+    .selector-item .content {
+      padding: 1.5rem;
+    }
+    .selector-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 12px 28px;
+      background: #25D366;
+      color: white;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+    .whatsapp-btn:hover {
+      background: #20bd5a;
+      transform: translateY(-2px);
+    }
+
+    .logo-box {
+      height: 200px;
+      background: linear-gradient(135deg, #22c55e, #15803d);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     </style>
 </head>
 <body>
@@ -450,6 +565,111 @@
         </a>
     </div>
 </section>
+
+      <section class="section">
+    <div class="container">
+      
+      <div class="text-center mb-8">
+        <h2 class="mb-6">Websites Built by <span style="color: #22c55e;">Robert Belive</span></h2>
+        <p>
+          Every site here is live, fast, and built from scratch. No copy-paste templates. 
+          I design and code mobile-first websites that load in under 2 seconds and turn visitors into clients. 
+          Check them out below - this is proof, not promises.
+        </p>
+      </div>
+
+      <div class="grid">
+        
+        <!-- Project 1 -->
+        <div class="selector-item show">
+          <div class="logo-box">
+            <img src="Robert-logo.png" width="200" alt="Robert Belive Tech Logo">
+          </div>
+          <div class="content">
+            <h3>Robert Belive Tech</h3>
+            <p>
+              Personal brand site for web development & graphics design services. Built with HTML, CSS, and JavaScript.
+            </p>
+            <a href="https://robert105-art.github.io/robert-belive" target="_blank" rel="noopener">View Live Site →</a>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="selector-item show">
+          <div class="content">
+            <h3>Portfolio Website</h3>
+            <p>
+              Smart bicycle landing page for bike lovers built by 
+              <a href="https://robert105-art.github.io/robert-belive" target="_blank">Robert Belive</a> 
+              Tech Company. Optimized for mobile and fast hosting on TinyHost.
+            </p>
+            <a href="https://kalisa-enterprises.tiiny.site" target="_blank" rel="noopener">View Live Site →</a>
+          </div>
+        </div>
+
+        <!-- Coming Soon -->
+        <div class="selector-item show">
+          <div class="content text-center">
+            <h3>Coming Soon</h3>
+            <p>More projects going on the proof wall.</p>
+            <a href="#">Stay Tuned</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- POSTERS & FLYERS -->
+  <section id="logos" class="section">
+    <div class="container">
+      
+      <div class="text-center mb-8">
+        <h2 class="mb-6">POSTERS <span style="color: white;">&</span> FLYERS</h2>
+        <p>Check out some of my latest poster and flyer designs below.</p>
+        <p>Every design is crafted from scratch with attention to detail and a focus on making your message stand out.</p>
+        <p>For all your poster and flyer design needs, I offer custom solutions that capture your brand's essence and drive engagement. I do all types of posters and flyers, from event promotions to business advertisements. Let's create something amazing together!</p>
+      </div>
+
+      <div class="grid">
+        <div class="selector-item">
+          <h3 style="color: red; text-align: center; padding: 1rem 0;">Tyre Poster</h3>
+          <img src="Tyre-Poster.jpg" alt="Robert-Graphics Tyre Poster" loading="lazy">
+        </div>
+
+        <div class="selector-item">
+          <img src="sports-flyers.jpg" alt="Sports Flyers" loading="lazy">
+        </div>
+
+        <div class="selector-item">
+          <img src="Products-Branding.jpg" alt="Coffee Products Branding" loading="lazy">
+        </div>
+
+        <div class="selector-item">
+          <img src="Political-poster.jpg" alt="Political Poster" loading="lazy">
+        </div>
+
+        <div class="selector-item">
+          <img src="Music-Poster.jpg" alt="Music Poster" loading="lazy">
+        </div>
+
+        <div class="selector-item">
+          <img src="FeiyGraphics.jpg" alt="Feiy Graphics" loading="lazy">
+        </div>
+
+        <div class="selector-item">
+          <img src="Bebe-cool.jpg" alt="Bebe Cool" loading="lazy">
+        </div>
+      </div>
+        
+      <div class="text-center">
+        <a href="https://wa.me/966578863032?text=I%20want%20to%20work%20with%20you" class="whatsapp-btn" rel="noopener">
+          Work With Me
+        </a>
+      </div>
+
+    </div>
+  </section>
 
 <section id="cards">
     <div class="section-title">
@@ -646,6 +866,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateScrollState);
 
 });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.selector-item').forEach(el => {
+      observer.observe(el);
+    });
 </script>
 
 </body>
